@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = qu_word_finder
-build_property.ProjectDir = D:\REPOS\qubeyond\qubeyondChallenge\.vs\qu_word_finder\
+build_property.ProjectDir = D:\REPOS\qu\challenge\qu_beyond\qu_word_finder\
