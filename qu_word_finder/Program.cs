@@ -6,7 +6,7 @@ namespace qu_word_finder
     {
         static void Main(string[] args)
         {
-
+            Console.WriteLine("asd");
         }
     }
 }
