@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordFinderWPF", "WordFinder
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "ClassLibrary\Library.csproj", "{0D27C134-0A8C-4C0E-BF21-D7F563B930F9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{18CF6F1E-DEBE-4C95-83F3-7332DC9C7C47}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\QU_BEYOND\LOGO\logo.png = ..\..\..\..\QU_BEYOND\LOGO\logo.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

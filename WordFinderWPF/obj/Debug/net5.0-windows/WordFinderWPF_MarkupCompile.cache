@@ -1,5 +1,5 @@
 ﻿WordFinderWPF
-1.0.0.0
+
 
 winexe
 C#
@@ -12,9 +12,9 @@ TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\App.xaml
 11407045341
 
-5-1153907514
+3-1233169557
 193-1891726104
 MainWindow.xaml;
 
-True
+False
 

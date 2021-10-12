@@ -24,5 +24,15 @@ namespace WordFinderWPF
         {
             InitializeComponent();
         }
+
+        private void sliderSizeMatrix_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
