@@ -34,17 +34,77 @@ namespace WordFinderWPF
         {
             //Hardcoded entry values
             var matrix = new List<string>() 
-            { 
-                "abcdc", 
-                "rgwio", 
-                "chill", 
-                "pqnsd", 
-                "uvdxy" 
+            {
+                "abcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcd",
+                "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
+                "chillchillchillchillchillchillchillchillchillchillchillchillchil",
+                "pqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
+                "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
+                "abcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcd",
+                "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
+                "chillchillchillchillchillchillchillchillchillchillchillchillchil",
+                "pqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
+                "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
+                "abcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcd",
+                "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
+                "chillchillchillchillchillchillchillchillchillchillchillchillchil",
+                "pqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
+                "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
+                "abcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcd",
+                "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
+                "chillchillchillchillchillchillchillchillchillchillchillchillchil",
+                "pqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
+                "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
+                "abcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcd",
+                "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
+                "chillchillchillchillchillchillchillchillchillchillchillchillchil",
+                "pqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
+                "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
+                "abcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcd",
+                "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
+                "chillchillchillchillchillchillchillchillchillchillchillchillchil",
+                "pqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
+                "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
+                "abcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcd",
+                "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
+                "chillchillchillchillchillchillchillchillchillchillchillchillchil",
+                "pqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
+                "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
+                "abcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcd",
+                "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
+                "chillchillchillchillchillchillchillchillchillchillchillchillchil",
+                "pqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
+                "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
+                "abcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcd",
+                "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
+                "chillchillchillchillchillchillchillchillchillchillchillchillchil",
+                "pqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
+                "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
+                "abcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcd",
+                "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
+                "chillchillchillchillchillchillchillchillchillchillchillchillchil",
+                "pqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
+                "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
+                "abcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcd",
+                "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
+                "chillchillchillchillchillchillchillchillchillchillchillchillchil",
+                "pqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
+                "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
+                "abcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcd",
+                "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
+                "chillchillchillchillchillchillchillchillchillchillchillchillchil",
+                "pqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
+                "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
+                "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
+                "chillchillchillchillchillchillchillchillchillchillchillchillchil",
+                "pqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
+                "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx"
+
             };
 
             var wordFinder = new WordFinder(matrix);
 
-            var wordStream = new List<string>() { "cold", "wind","chill","snow" };
+            var wordStream = new List<string>() { "cold", "wind", "chill", "snow" };
 
             var result = wordFinder.Find(wordStream);
 
