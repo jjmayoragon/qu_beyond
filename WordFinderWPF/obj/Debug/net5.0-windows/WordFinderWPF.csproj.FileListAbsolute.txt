@@ -1,15 +1,14 @@
-D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\obj\Debug\net5.0-windows\WordFinderWPF.csproj.AssemblyReference.cache
+D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\bin\Debug\net5.0-windows\WordFinderWPF.exe
+D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\bin\Debug\net5.0-windows\WordFinderWPF.dll
+D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\bin\Debug\net5.0-windows\WordFinderWPF.deps.json
+D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\bin\Debug\net5.0-windows\WordFinderWPF.runtimeconfig.json
+D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\bin\Debug\net5.0-windows\WordFinderWPF.runtimeconfig.dev.json
+D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\bin\Debug\net5.0-windows\ref\WordFinderWPF.dll
+D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\bin\Debug\net5.0-windows\WordFinderWPF.pdb
 D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\obj\Debug\net5.0-windows\MainWindow.g.cs
 D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\obj\Debug\net5.0-windows\App.g.cs
 D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\obj\Debug\net5.0-windows\WordFinderWPF_MarkupCompile.cache
 D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\obj\Debug\net5.0-windows\WordFinderWPF_MarkupCompile.lref
-D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\bin\Debug\net5.0-windows\WordFinderWPF.exe
-D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\bin\Debug\net5.0-windows\WordFinderWPF.deps.json
-D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\bin\Debug\net5.0-windows\WordFinderWPF.runtimeconfig.json
-D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\bin\Debug\net5.0-windows\WordFinderWPF.runtimeconfig.dev.json
-D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\bin\Debug\net5.0-windows\WordFinderWPF.dll
-D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\bin\Debug\net5.0-windows\ref\WordFinderWPF.dll
-D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\bin\Debug\net5.0-windows\WordFinderWPF.pdb
 D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\obj\Debug\net5.0-windows\MainWindow.baml
 D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\obj\Debug\net5.0-windows\WordFinderWPF.g.resources
 D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\obj\Debug\net5.0-windows\WordFinderWPF.GeneratedMSBuildEditorConfig.editorconfig
@@ -20,3 +19,4 @@ D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\obj\Debug\net5.0-windows\WordFinde
 D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\obj\Debug\net5.0-windows\ref\WordFinderWPF.dll
 D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\obj\Debug\net5.0-windows\WordFinderWPF.pdb
 D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\obj\Debug\net5.0-windows\WordFinderWPF.genruntimeconfig.cache
+D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\obj\Debug\net5.0-windows\WordFinderWPF.csproj.AssemblyReference.cache

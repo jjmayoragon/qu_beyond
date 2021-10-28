@@ -8,43 +8,72 @@ namespace WordFinderWPF
 {
     public class WordFinder
     {
-        //Initialize generic for best practice
+        //Initializing generics
         private readonly IEnumerable<string> _matrix = new List<string>();
+        private readonly List<string> _allStreams = new List<string>();
+        private List<string> _foundList = new List<string>();
 
-        //Also if no words are found, the "Find" method should return an empty sent of strings
-        private List<string> result = new List<string>();
+        private readonly int _streamLenght;
 
         public WordFinder(IEnumerable<string> matrix)
         {
             _matrix = matrix;
+
+            //Initialize word stream lenght
+            _streamLenght = _matrix.First().Count();
+
+            //Get all word streams
+            _allStreams = GetAllStreams(matrix);
         }
 
+        private List<string> GetAllStreams(IEnumerable<string> matrix)
+        {
+            var allStreams = new List<string>();
+
+            //Get Rows from Matrix
+            foreach (var row in matrix)
+            {
+                allStreams.Add(row);
+            }
+
+            //Get Columns from Matrix
+            for (int i = 0; i < _streamLenght; i++)
+            {
+                var column = String.Empty;
+                foreach (var row in matrix)
+                {
+                    column += row[i];
+                }
+                allStreams.Add(column);
+            }
+
+            //Return one large list ready to use for linq methods
+            return allStreams;
+        }
         public IEnumerable<string> Find(IEnumerable<string> wordstream)
         {
 
-            foreach (var word in wordstream)
+            foreach (var row in wordstream)
             {
-                //Linq functions for high performance will allow us to iterate the generic IEnumerable in a native way.
-                //FirstOrDefault will find the first result or throw null.
-                //FirstOrDefault will avoid repeated results."
-                //Lambda expressions and delegates are used for clean code
-                //Use of notation convention for a friendly code
-                var query = _matrix
-                    .Where(m => m.Contains(word))
+                //Linq extension methods will allow us to query the generic in a native way and high performance
+                //FirstOrDefault will find the first result, otherwise will return "null". Also will avoid repeated results."
+                //Lambda expressions and delegates are used for cleaner code
+                var query = _allStreams
+                    .Where(m => m.Contains(row))
                     .FirstOrDefault();
 
-                //Only add results if not null.
+                //Add result if not null.
                 if (query != null)
-                    result.Add(word);
+                    _foundList.Add(row);
 
                 //Only Top 10 words break the loop and continue the next statement
-                if (result.Count > 10)
+                if (_foundList.Count > 10)
                     break;
 
             }
 
             //If no words are found, result will be an empty set of strings.
-            return result;
+            return _foundList;
         }
     }
 }

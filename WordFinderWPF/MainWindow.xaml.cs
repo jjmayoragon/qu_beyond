@@ -33,17 +33,24 @@ namespace WordFinderWPF
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //Hardcoded entry values
-            var matrix = new List<string>() { "abcdc", "rgwio", "chill", "pqnsd", "uvdxy" };
+            var matrix = new List<string>() 
+            { 
+                "abcdc", 
+                "rgwio", 
+                "chill", 
+                "pqnsd", 
+                "uvdxy" 
+            };
 
             var wordFinder = new WordFinder(matrix);
 
-            var wordStream = new List<string>() { "dsds", "chill" };
+            var wordStream = new List<string>() { "cold", "wind","chill","snow" };
 
             var result = wordFinder.Find(wordStream);
 
             MessageBox.Show(result.Count().ToString() + " words found");
 
-            //Showing Top 10 words finder results
+            //Show Top 10 words founded
             foreach (var r in result)
             {
                 MessageBox.Show(r, "Word found");
