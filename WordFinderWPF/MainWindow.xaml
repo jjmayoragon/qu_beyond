@@ -5,20 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WordFinderWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="744" Width="1118">
+        Title="MainWindow" Height="800" Width="1200" MinHeight="750" MinWidth="900">
     <Grid>
-        <Grid Background="#FFD3434D" VerticalAlignment="Bottom" Height="100">
-            <Grid Width="750" Height="100">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+     
+        <Grid Grid.Row="0" Height="100" VerticalAlignment="Top" Background="#FFD3434D">
+            <Label Content="WORD FINDER" HorizontalAlignment="center" Margin="0,15,0,0" VerticalAlignment="Top" Width="249" Height="60" FontSize="36" Background="{x:Null}" Foreground="White" FontStretch="Normal" FontWeight="SemiBold" FontFamily="Roboto"/>
+            <Image HorizontalAlignment="Left" Height="59" Margin="100,0,0,0" VerticalAlignment="center" Width="139" Source="/logo.png"/>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="960,52,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <DataGrid IsReadOnly="False" IsEnabled="True" Name="matrix_DG" AutoGenerateColumns="False" AlternatingRowBackground="PowderBlue" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=x_pos}" Width="80"/>
+                    <DataGridTextColumn Binding="{Binding Path=y_pos}" Width="80"/>
+                    <DataGridTextColumn Binding="{Binding Path=letter}" Width="80"/>
+                </DataGrid.Columns>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Width" Value="25"/>
+                        <Setter Property="Height" Value="25"/>
+                    </Style>
+                </DataGrid.CellStyle>
+                    
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Row="2"  Background="#FFD3434D" VerticalAlignment="Bottom" Height="100">
+            <Grid Width="750" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Slider x:Name="sliderSizeMatrix" HorizontalAlignment="Center" Margin="0,19,0,0" VerticalAlignment="Top" Width="700" Height="34" Maximum="64" Value="5" ValueChanged="sliderSizeMatrix_ValueChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <Label Content="Choose Matrix size" HorizontalAlignment="Center" Margin="0,42,0,0" VerticalAlignment="Top" Width="338" Height="50" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Roboto" Foreground="White"/>
                 <Label Content="0" HorizontalAlignment="Left" Margin="25,45,0,0" VerticalAlignment="Top" Width="40" FontSize="24" FontFamily="Roboto" Foreground="White"/>
                 <Label Content="64" HorizontalAlignment="Right" Margin="0,53,25,0" VerticalAlignment="Top" Width="40" FontSize="24" FontFamily="Roboto" Foreground="White"/>
             </Grid>
-        </Grid>
-        <Grid>
-            <Rectangle Height="88" VerticalAlignment="Top" Fill="#FFD3434D"/>
-            <Label Content="WORD FINDER" HorizontalAlignment="center" Margin="0,15,0,0" VerticalAlignment="Top" Width="249" Height="60" FontSize="36" Background="{x:Null}" Foreground="White" FontStretch="Normal" FontWeight="SemiBold" FontFamily="Roboto"/>
-            <Image HorizontalAlignment="Left" Height="59" Margin="92,10,0,0" VerticalAlignment="Top" Width="139" Source="/logo.png"/>
         </Grid>
 
     </Grid>
