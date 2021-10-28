@@ -64,7 +64,11 @@ namespace WordFinderWPF
 
                 //Add result if not null.
                 if (query != null)
-                    _foundList.Add(word);
+                {
+                    //Add result if the word is not repeated
+                    if (!_foundList.Contains(word))
+                        _foundList.Add(word);
+                }
 
                 //Only Top 10 words break the loop and continue the next statement
                 if (_foundList.Count > 10)

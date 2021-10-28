@@ -25,9 +25,6 @@ namespace WordFinderWPF
         public MainWindow()
         {
             InitializeComponent();
-
-           
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -54,7 +51,7 @@ namespace WordFinderWPF
                 "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
                 "chillchillchillchillchillchillchillchillchillchillchillchillchil",
                 "pqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
-                "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
+                "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxygatoyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
                 "abcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcd",
                 "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
                 "chillchillchillchillchillchillchillchillchillchillchillchillchil",
@@ -83,20 +80,20 @@ namespace WordFinderWPF
                 "abcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcd",
                 "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
                 "chillchillchillchillchillchillchillchillchillchillchillchillchil",
-                "pqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
-                "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
-                "abcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcd",
-                "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
+                "hqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
+                "ivdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
+                "lbcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcd",
+                "lgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
                 "chillchillchillchillchillchillchillchillchillchillchillchillchil",
                 "pqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
                 "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
                 "abcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcdcabcd",
-                "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
+                "rgwiorgwiorgwiorgatorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
                 "chillchillchillchillchillchillchillchillchillchillchillchillchil",
-                "pqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
-                "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
-                "rgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
-                "chillchillchillchillchillchillchillchillchillchillchillchillchil",
+                "gqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
+                "avdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx",
+                "tgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwiorgwi",
+                "ohillchillchillchillchillchillchillchillchillchillchillchillchil",
                 "pqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqnsdpqns",
                 "uvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdxyuvdx"
 
@@ -104,7 +101,7 @@ namespace WordFinderWPF
 
             var wordFinder = new WordFinder(matrix);
 
-            var wordStream = new List<string>() { "cold", "wind", "chill", "snow" };
+            var wordStream = new List<string>() { "cold", "gato", "chill", "snow", "gato" };
 
             var result = wordFinder.Find(wordStream);
 
