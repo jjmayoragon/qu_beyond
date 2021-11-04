@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WordFinderWPF.Interfaces;
 
 namespace WordFinderWPF
 {
-    public class WordFinder
+    public class WordFinder: IWordFinder
     {
         //Initializing generics
         private readonly IEnumerable<string> _matrix = new List<string>();

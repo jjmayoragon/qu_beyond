@@ -5,11 +5,6 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordFinderWPF", "WordFinderWPF\WordFinderWPF.csproj", "{4768A68D-9867-4D1E-8B28-49137A4D14A2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{18CF6F1E-DEBE-4C95-83F3-7332DC9C7C47}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\QU_BEYOND\LOGO\logo.png = ..\..\..\..\QU_BEYOND\LOGO\logo.png
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

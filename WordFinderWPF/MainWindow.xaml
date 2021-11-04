@@ -1,11 +1,13 @@
 ﻿<Window x:Class="WordFinderWPF.MainWindow"
+    
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WordFinderWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="845" Width="840" MinHeight="845" MinWidth="840">
+        Title="MainWindow" Height="845" Width="840" MinHeight="845" MinWidth="840" >
+  
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -19,163 +21,67 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Row="0" Grid.ColumnSpan="3" Height="100" VerticalAlignment="Top" Background="#FFD3434D">
+            <Image HorizontalAlignment="Left" Height="59" Margin="40,0,0,0" VerticalAlignment="center" Width="139" Source="Resources/logo.png"/>
             <Label Content="WORD FINDER" HorizontalAlignment="center" Margin="0,15,0,0" VerticalAlignment="Top" Width="249" Height="60" FontSize="36" Background="{x:Null}" Foreground="White" FontStretch="Normal" FontWeight="SemiBold" FontFamily="Roboto"/>
-            <Image HorizontalAlignment="Left" Height="59" Margin="40,0,0,0" VerticalAlignment="center" Width="139" Source="/logo.png"/>
-            <Button Content="Button" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Click="Button_Click" Width="100" Height="25" BorderBrush="Beige"/>
+            <Button Content="Generate" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Click="Button_Click" Width="100" Height="25" BorderBrush="Beige"/>
         </Grid>
-        <Grid Grid.Row="1"  Background="#FFD3434D">
+        <Grid Grid.Row="1" Grid.Column="2" Background="#FFD3434D">
+            <StackPanel VerticalAlignment="Center"/>
+        </Grid>
+        <Grid Name="matrixContainer"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1" >
+
 
         </Grid>
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="0" Grid.Column="0" Background="Cornsilk">
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">A</Label>
-            </Grid>
-            <Grid Grid.Row="1" Grid.Column="0" >
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">R</Label>
-            </Grid>
-            <Grid Grid.Row="2" Grid.Column="0" Background="Cornsilk">
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">C</Label>
-            </Grid>
-            <Grid Grid.Row="3" Grid.Column="0" >
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">P</Label>
-            </Grid>
-            <Grid Grid.Row="4" Grid.Column="0" Background="Cornsilk">
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">U</Label>
-            </Grid>
+        <Grid Grid.Row="1" Grid.Column="1" Name="setSizePanel" Visibility="Visible">
+            <Grid>
+                <StackPanel Margin="0 0 0 100" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label  x:Name="lblRows" FontSize="170" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding ElementName=sldRows, Path=Value, UpdateSourceTrigger=PropertyChanged}" ></Label>
+                    <Label  FontSize="170" HorizontalAlignment="Center" VerticalAlignment="Center">x</Label>
+                    <Label x:Name="lblColumns" FontSize="170" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding ElementName=sldColumns, Path=Value, UpdateSourceTrigger=PropertyChanged}"></Label>
+                </StackPanel>
 
-            <Grid Grid.Row="0" Grid.Column="2" Background="Cornsilk">
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">C</Label>
+                <!--<Grid VerticalAlignment="Bottom" Width="360" HorizontalAlignment="Center" Margin="0 0 0 150">
+                    <Button x:Name="btnGenerateMatrix" FontSize="20" Foreground="Green" FontWeight="Bold" Click="btnGenerateMatrix_Click" Margin="0,0,210,0" HorizontalAlignment="Right" Width="150">Generate</Button>
+                    <Button x:Name="btnCancel" HorizontalAlignment="Right"  Width="150" Height="60" FontSize="20" Foreground="Tomato" FontWeight="Bold" Click="btnCancel_Click">Cancel</Button>
+                </Grid>-->
             </Grid>
-            <Grid Grid.Row="1" Grid.Column="2" >
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">W</Label>
-            </Grid>
-            <Grid Grid.Row="2" Grid.Column="2" Background="Cornsilk">
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">I</Label>
-            </Grid>
-            <Grid Grid.Row="3" Grid.Column="2" >
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">N</Label>
-            </Grid>
-            <Grid Grid.Row="4" Grid.Column="2" Background="Cornsilk">
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">D</Label>
-            </Grid>
-
-            <Grid Grid.Row="0" Grid.Column="4" Background="Cornsilk">
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">C</Label>
-            </Grid>
-            <Grid Grid.Row="1" Grid.Column="4" >
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">O</Label>
-            </Grid>
-            <Grid Grid.Row="2" Grid.Column="4" Background="Cornsilk">
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">L</Label>
-            </Grid>
-            <Grid Grid.Row="3" Grid.Column="4" >
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">D</Label>
-            </Grid>
-            <Grid Grid.Row="4" Grid.Column="4" Background="Cornsilk">
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">Y</Label>
-            </Grid>
-
-            <Grid Grid.Row="0" Grid.Column="1" >
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">B</Label>
-            </Grid>
-            <Grid Grid.Row="1" Grid.Column="1" Background="Cornsilk">
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">G</Label>
-            </Grid>
-            <Grid Grid.Row="2" Grid.Column="1" >
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">H</Label>
-            </Grid>
-            <Grid Grid.Row="3" Grid.Column="1" Background="Cornsilk">
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">Q</Label>
-            </Grid>
-            <Grid Grid.Row="4" Grid.Column="1" >
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">V</Label>
-            </Grid>
-
-            <Grid Grid.Row="0" Grid.Column="3" >
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">D</Label>
-            </Grid>
-            <Grid Grid.Row="1" Grid.Column="3" Background="Cornsilk">
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">I</Label>
-            </Grid>
-            <Grid Grid.Row="2" Grid.Column="3" >
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">L</Label>
-            </Grid>
-            <Grid Grid.Row="3" Grid.Column="3" Background="Cornsilk">
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">S</Label>
-            </Grid>
-            <Grid Grid.Row="4" Grid.Column="3" >
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">X</Label>
-            </Grid>
-
-            
         </Grid>
-        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Background="#FFD3434D"></Grid>
+        <Grid  x:Name="pruebaGrid" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Background="#FFD3434D" >
+
+        </Grid>
         <Grid Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="2" Background="#FFD3434D" Height="100">
-            <Slider x:Name="sliderSizeMatrix" HorizontalAlignment="Stretch" Margin="0,19,0,0" VerticalAlignment="Top" Interval="5"  Height="34" Maximum="64" Value="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Label Content="ROWS" HorizontalAlignment="Center" Margin="0,42,0,0" VerticalAlignment="Top" Width="338" Height="50" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Roboto" Foreground="White"/>
-            <Label Content="0" HorizontalAlignment="Left" Margin="25,45,0,0" VerticalAlignment="Top" Width="40" FontSize="24" FontFamily="Roboto" Foreground="White"/>
-            <Label Content="64" HorizontalAlignment="Right" Margin="0,45,25,0" VerticalAlignment="Top" Width="40" FontSize="24" FontFamily="Roboto" Foreground="White"/>
+            <Slider PreviewMouseLeftButtonUp="sldColumns_PreviewMouseLeftButtonUp" IsSnapToTickEnabled="True" TickFrequency="1" x:Name="sldColumns" HorizontalAlignment="Stretch" Margin="0,19,0,0" VerticalAlignment="Top"  Height="34" Minimum="1" Maximum="64" Value="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ValueChanged="sldColumns_ValueChanged" />
+            <StackPanel Orientation="Horizontal" Margin="0,42,0,0" Width="180">
+                <Label Content="COLUMNS ="  FontSize="24"  FontFamily="Roboto" Foreground="White"/>
+                <Label Content="{Binding ElementName=sldColumns, Path=Value, UpdateSourceTrigger=PropertyChanged}" FontSize="24"   FontFamily="Roboto" Foreground="White"/>
+            </StackPanel>
+            <Label Content="1" HorizontalAlignment="Left" Margin="5,45,0,0" VerticalAlignment="Top" Width="40" FontSize="24" FontFamily="Roboto" Foreground="White"/>
+            <Label Content="64" HorizontalAlignment="Right" Margin="0,45,5,0" VerticalAlignment="Top" Width="40" FontSize="24" FontFamily="Roboto" Foreground="White"/>
         </Grid>
+        <Grid Grid.Row="1" Grid.Column="0"  Background="#FFD3434D" HorizontalAlignment="Center" Width="100" >
+            <Slider PreviewMouseLeftButtonUp="sldRows_PreviewMouseLeftButtonUp" IsSnapToTickEnabled="True" TickFrequency="1" x:Name="sldRows"  HorizontalAlignment="Left" VerticalAlignment="Center" Value="5" Minimum="1" Maximum="64" Height="500" Orientation="Vertical" Margin="15,0,0,0" ValueChanged="sldRows_ValueChanged"/>
+            <StackPanel Height="100" HorizontalAlignment="Right">
+                <Label HorizontalAlignment="Center" Content="ROWS"  FontSize="22"  FontFamily="Roboto" Foreground="White" >
+                    
 
+                </Label>
+                <Label HorizontalAlignment="Center" Content="{Binding ElementName=sldRows, Path=Value, UpdateSourceTrigger=PropertyChanged}"  FontSize="24" FontFamily="Roboto" Foreground="White">
+                    
 
-        <Grid Grid.Row="1" Grid.Column="2"  Background="#FFD3434D" HorizontalAlignment="Center" Width="100" >
-            <Slider HorizontalAlignment="Left" Interval="5" VerticalAlignment="Center" Value="5" Maximum="64" Height="500" Orientation="Vertical" Margin="20,0,0,0"/>
-            <Label Content="COLUMNS" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Roboto" Foreground="White" Width="450" RenderTransformOrigin="0.5,0.5" Margin="20,0,0,0">
-                <Label.LayoutTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="-90"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Label.LayoutTransform>
-                <Label.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="0"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Label.RenderTransform>
+                </Label>
+            </StackPanel>
+            
+            <Label Content="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="40" FontSize="24" FontFamily="Roboto" Foreground="White" Margin="40,0,0,40">
 
             </Label>
-            <Label Content="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="40" FontSize="24" FontFamily="Roboto" Foreground="White" Margin="40,0,0,40">
-                <Label.LayoutTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="-90"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Label.LayoutTransform>
-            </Label>
-            <Label Content="64" HorizontalAlignment="Center" VerticalAlignment="top" Margin="40,40,0,0" Width="40" FontSize="24" FontFamily="Roboto" Foreground="White">
-                <Label.LayoutTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="-90"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Label.LayoutTransform>
+            <Label Content="64" HorizontalAlignment="Center" VerticalAlignment="top" Margin="20,40,0,0" Width="40" FontSize="24" FontFamily="Roboto" Foreground="White">
+
             </Label>
 
         </Grid>
 
     </Grid>
+
 </Window>
+
