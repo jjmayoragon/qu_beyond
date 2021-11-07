@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WordFinderWPF.Interfaces;
+using WordFinderWPF.Classes;
 
 namespace WordFinderWPF
 {
@@ -11,55 +12,23 @@ namespace WordFinderWPF
     {
         //Initializing generics
         private readonly IEnumerable<string> _matrix = new List<string>();
-        private readonly List<string> _allMatrixStreams = new List<string>();
+        private List<string> _foundListNoRepeated = new List<string>();
         private List<string> _foundList = new List<string>();
-
-        private readonly int _streamLenght;
 
         public WordFinder(IEnumerable<string> matrix)
         {
             _matrix = matrix;
-
-            //Initialize word stream lenght
-            _streamLenght = _matrix.First().Count();
-
-            //Get all word streams
-            _allMatrixStreams = GetAllStreams(matrix);
         }
 
-        private List<string> GetAllStreams(IEnumerable<string> matrix)
-        {
-            var allStreams = new List<string>();
-
-            //Get Rows from Matrix
-            foreach (var row in matrix)
-            {
-                allStreams.Add(row);
-            }
-
-            //Get Columns from Matrix
-            for (int i = 0; i < _streamLenght; i++)
-            {
-                var column = String.Empty;
-                foreach (var row in matrix)
-                {
-                    column += row[i];
-                }
-                allStreams.Add(column);
-            }
-
-            //Return one large list ready to use for linq methods
-            return allStreams;
-        }
+        
         public IEnumerable<string> Find(IEnumerable<string> wordstream)
         {
-
             foreach (var word in wordstream)
             {
                 //Linq extension methods will allow us to query the generic in a native way and high performance
                 //FirstOrDefault will find the first result, otherwise will return "null". Also will avoid repeated results."
                 //Lambda expressions and delegates are used for cleaner code
-                var query = _allMatrixStreams
+                var query = _matrix
                     .Where(m => m.Contains(word))
                     .FirstOrDefault();
 
@@ -67,14 +36,26 @@ namespace WordFinderWPF
                 if (query != null)
                 {
                     //Add result if the word is not repeated
-                    if (!_foundList.Contains(word))
-                        _foundList.Add(word);
-                }
+                    if (!_foundListNoRepeated.Contains(word))
+                    {
+                        //Separate index and stream
+                        string[] stream_index = query.Split("_");
 
+                        //Get index
+                        var index = stream_index[0];
+
+                        //Add the word found with row index where it was found
+                        _foundList.Add(index + "_" + word);
+
+                        //List to check non repeated
+                        _foundListNoRepeated.Add(word);
+
+                    }
+                    
+                }
                 //Only Top 10 words break the loop and continue the next statement
                 if (_foundList.Count > 10)
                     break;
-
             }
 
             //If no words are found, result will be an empty set of strings.

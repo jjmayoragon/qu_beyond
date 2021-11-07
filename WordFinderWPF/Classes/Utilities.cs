@@ -10,6 +10,7 @@ namespace WordFinderWPF.Classes
 {
     public class Utilities
     {
+        public static List<string> CellsToHighLight { get; set; }
         public static IEnumerable<string> CallInterface(MatrixObj matrixObj)
         {
             //INTERFACE
@@ -17,7 +18,7 @@ namespace WordFinderWPF.Classes
             var searchEngine = new SearchEngine(matrixObj._wordsForSearch);
 
             //Interface
-            var wordFinder = new WordFinder(matrixObj._matrix);
+            var wordFinder = new WordFinder(matrixObj._allMatrixStreams);
 
             //Dependency Inyector
             searchEngine.AddMethod(wordFinder);
@@ -28,7 +29,12 @@ namespace WordFinderWPF.Classes
             return results;
 
         }
+
+ 
+
     }
+
+    
 
     public static class UIHelper
     {

@@ -16,30 +16,48 @@ using WordFinderWPF.Interfaces;
 using WordFinderWPF.Classes;
 using System.Xml.Linq;
 using System.IO;
-
+using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace WordFinderWPF
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+
     public partial class MainWindow : Window
     {
 
         Cursor PencilCur, HammerCur, MinimalPen, MinimalCur;
+        Dictionary<int, string> dictionaryStream;
+        Dictionary<string, string> dictionaryCharacter;
+
         
+        
+        //Matrix objet values
+        List<string> _matrix;
+        int _cols;
+        int _rows;
+        List<string> _wordsToFind;
+
+        public ObservableCollection<string> listWordsToFind { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
-           
+
+            dictionaryStream = new Dictionary<int, string>();
+            dictionaryCharacter = new Dictionary<string, string>();
+            _wordsToFind = new List<string>();
+            _matrix = new List<string>();
+
             matrixContainer.Visibility = Visibility.Visible;
 
-            Format(5,5);
-           
+            Format(5, 5);
 
             //Load cursor resources
-            string cursorUri = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName+"\\Resources";
+            string cursorUri = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\Resources";
             PencilCur = new Cursor($"{cursorUri}\\Pencil.cur");
             HammerCur = new Cursor($"{cursorUri}\\Hammer.cur");
             MinimalPen = new Cursor($"{cursorUri}\\MinimalPen.cur");
@@ -47,55 +65,97 @@ namespace WordFinderWPF
 
             this.Cursor = MinimalCur;
 
+            DataContext = this;
+
+            listWordsToFind = new ObservableCollection<string>();
+
+
+
+        }
+      
+
+        
+
+      
+        private void btnGenerate_click(object sender, RoutedEventArgs e)
+        {
+            SetMatrixValues(_cols,_rows,_matrix,_wordsToFind);
+            GenerateMatrix();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void SetMatrixValues(int rows, int cols, List<string> matrix, List<string> wordsToFind)
+        {
+            _matrix.Clear();
+            for (int i = 1; i <= rows; i++)
+            {
+                _matrix.Add(dictionaryStream[i]);
+            }
+
+            _wordsToFind.Clear();
+            foreach (var item in listWordsToFind)
+            {
+                _wordsToFind.Add(item.ToString());
+            }
+        }
+
+        private void GenerateMatrix()
         {
             //EVENTS
-            //Matrix object to be send
-            var matrix = new MatrixObj();
+            //Matrix object to be send as a VideEventArgs
+            var matrix = new MatrixObj(_cols, _rows, _matrix, _wordsToFind);
 
             //Publisher
             var generator = new MatrixGenerator();
 
             //Suscribers
-            var hardCodeMatrix = new MessageBoxService();
-            
-            //Suscription
-            generator.MatrixGenerated += hardCodeMatrix.OnMatrixGenerated;
+            var messageBox = new MessageBoxService();
+            var hightLightWordsFound = new HighLightWordsFoundService();
+
+            //Suscriptions
+            if (method1.IsChecked == true)
+                generator.MatrixGenerated += messageBox.OnMatrixGenerated;
+            if (method2.IsChecked == true)
+                generator.MatrixGenerated += hightLightWordsFound.OnMatrixGenerated;
 
             //Execute event and call suscribers methods
             generator.Generate(matrix);
+
+            HighLightCells(Utilities.CellsToHighLight);
         }
 
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
+
+        public void HighLightCells(List<string> cellIndexs)
         {
-            setSizePanel.Visibility = Visibility.Collapsed;
-            matrixContainer.Visibility = Visibility.Visible;
+
+            foreach (var cell in cellIndexs)
+            {
+                var rowGrids = (Grid)UIHelper.FindChild<Grid>(matrixContainer, cell);
+
+                var color = new SolidColorBrush(Color.FromRgb(0xD3, 0x43, 0x4D));
+
+                rowGrids.Background = Brushes.Gold;
+
+                var lbls = (Label)UIHelper.FindChild<Label>(rowGrids, cell + "lbl");
+
+                lbls.Foreground = Brushes.RoyalBlue;
+
+               
+            }
+
         }
 
- 
 
-
-
-        private void btnGenerateMatrix_Click(object sender, RoutedEventArgs e)
-        {
-            var rows = Convert.ToInt32(lblRows.Content);
-            var cols = Convert.ToInt32(lblColumns.Content);
-
-            matrixContainer.Visibility = Visibility.Visible;
-            setSizePanel.Visibility = Visibility.Collapsed;
-
-            Format(rows, cols);
-        }
-
-       
 
         private void Format(int rows, int cols)
         {
+            _cols = cols;
+            _rows = rows;
+
             matrixContainer.Children.Clear();
             matrixContainer.RowDefinitions.Clear();
             matrixContainer.ColumnDefinitions.Clear();
+
+
 
             //Inner sections for the matrix
             //Row & Columns Definitions
@@ -116,7 +176,7 @@ namespace WordFinderWPF
             for (int i = 0; i < rows; i++)
             {
                 aux = i % 2 == 0 ? 0 : 1;
-                
+
                 for (int j = 0; j < cols; j++)
                 {
                     var innerGrid = new Grid();
@@ -126,21 +186,18 @@ namespace WordFinderWPF
 
                     var index = ("r" + (i + 1) + "c" + (j + 1)).ToString();
 
-
-
                     innerGrid.Background = aux % 2 == 0 ? Brushes.Cornsilk : Brushes.White;
                     aux++;
 
                     var lbl = new Label
                     {
                         Name = index + "lbl",
-                        Content = index.Substring(1, index.IndexOf("c") - 1) + index.Substring(index.IndexOf("c") + 1),
+                   
                         FontSize = 40,
                         VerticalAlignment = VerticalAlignment.Center,
                         HorizontalAlignment = HorizontalAlignment.Center
                     };
 
-                    
                     innerGrid.Children.Add(lbl);
 
                     innerGrid.Name = index;
@@ -156,16 +213,15 @@ namespace WordFinderWPF
             setSizePanel.Visibility = Visibility.Collapsed;
             matrixContainer.Visibility = Visibility.Visible;
             matrixContainer.Opacity = 1;
+
         }
 
-    
+
 
         private void sldColumns_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             setSizePanel.Visibility = Visibility.Visible;
             matrixContainer.Opacity = 0.1;
-            
-           
         }
 
         private void sldRows_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -191,12 +247,25 @@ namespace WordFinderWPF
             var sld = (Slider)sender;
 
             var rows = Convert.ToInt32(lblRows.Content);
+
             var cols = Convert.ToInt32(sld.Value);
 
             Format(rows, cols);
         }
 
-    
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SetRowVisible(true);
+
+           
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            SetRowVisible(false);
+
+        }
+
         private void row_MouseEnter(object sender, MouseEventArgs e)
         {
             if (e.OriginalSource is Grid)
@@ -206,86 +275,164 @@ namespace WordFinderWPF
                 grid.Cursor = MinimalPen;
 
                 var gName = grid.Name;
-                var colIndex = grid.Name.IndexOf("c");
 
-                
+                var colIndex = grid.Name.IndexOf("c");
 
                 int cols = Convert.ToInt32(lblColumns.Content);
 
                 for (int i = 1; i <= cols; i++)
                 {
                     var name = gName.Substring(0, colIndex) + "c" + i;
-                    var rowGrids = (Grid)UIHelper.FindChild<Grid>(matrixContainer, name);
-                    var color = new SolidColorBrush(Color.FromRgb(0xD3, 0x43, 0x4D));
-                    rowGrids.Background = Brushes.Gold;
-                    var lbls = (Label)UIHelper.FindChild<Label>(rowGrids, name + "lbl");
-                    lbls.Foreground = Brushes.RoyalBlue;
-                }
 
+                    var rowGrids = (Grid)UIHelper.FindChild<Grid>(matrixContainer, name);
+
+                    var color = new SolidColorBrush(Color.FromRgb(0xD3, 0x43, 0x4D));
+
+                    rowGrids.Background = Brushes.Gold;
+
+                    var lbls = (Label)UIHelper.FindChild<Label>(rowGrids, name + "lbl");
+
+                    lbls.Foreground = Brushes.RoyalBlue;
+
+                    
+                }
+            }
+        }
+
+        private void btnAddRowToMatrix_Click(object sender, RoutedEventArgs e)
+        {
+            var row = Convert.ToInt32(lblNumberOfRows.Content.ToString().Split(" ")[2]);
+            var stream = txtSetRow.Text;
+            AddRowToMatrix(row, stream);
+
+            gridSetRow.Visibility = Visibility.Collapsed;
+
+            
+        }
+        private void AddRowToMatrix(int row,string stream)
+        {
+            //Add stream to dictionary
+            dictionaryStream[row] = stream;
+
+            //MessageBox.Show(dictionaryStream[row]);
+
+            var cols = sldColumns.Value;
+
+            for (int i = 1; i <= cols; i++)
+            {
+                //Add specific letter to dictionary for cells
+                var r = "r" + row;
+                var c = "c" + i;
+                var cellName = r + c;
+                var letter = stream.Substring(i - 1, 1);
+                dictionaryCharacter[cellName] = letter;
+
+                var gridCell = (Grid)UIHelper.FindChild<Grid>(matrixContainer, cellName);
+                var lblCell = (Label)UIHelper.FindChild<Label>(gridCell, cellName+"lbl");
+
+                lblCell.Content = letter;
+  
             }
 
-
+           
         }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            SetRowVisible(false);
+        }
+
+        private void btn_addWordToFind(object sender, RoutedEventArgs e)
+        {
+            listWordsToFind.Add(txtWordToFind.Text);
+        }
+
         private void row_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            var row = string.Empty;
+
+            var gridName = string.Empty;
+
             if (e.OriginalSource is Grid)
             {
-
                 var grid = (Grid)e.OriginalSource;
 
-                var name = grid.Name;
+                gridName = grid.Name;
 
-                MessageBox.Show(name);
+                var index = grid.Name.IndexOf("r");
 
-               
+                row = grid.Name.Substring(index + 1, 1);
 
+                //MessageBox.Show(row);
             }
 
-            if(sender is Label)
+            if (sender is Label)
             {
                 var lbl = (Label)sender;
 
-                var name = lbl.Name;
+                gridName = lbl.Name;
 
-                var index = name.IndexOf("lbl");
+                var index = lbl.Name.IndexOf("r");
 
-                MessageBox.Show(name.Substring(0, index));
+                row = lbl.Name.Substring(index + 1, 1);
+
+                //MessageBox.Show(row);
             }
+
+            lblNumberOfRows.Content = "Setting row: " + row;
+
+            SetRowVisible(true);
+
+            
+
+
+
+            
+
+
+        }
+
+        private void SetRowVisible(bool isVisible)
+        {
+            if (isVisible)
+                gridSetRow.Visibility = Visibility.Visible;
+            else
+                gridSetRow.Visibility = Visibility.Collapsed;
         }
 
         private void row_MouseLeave(object sender, MouseEventArgs e)
         {
             if (e.OriginalSource is Grid)
             {
-
-                var grid = (Grid)e.OriginalSource;  
+                var grid = (Grid)e.OriginalSource;
 
                 grid.Cursor = MinimalCur;
 
                 var gName = grid.Name;
-                var colIndex = gName.IndexOf("c");
 
+                var colIndex = gName.IndexOf("c");
 
                 var rowIndex = gName.Substring(1, colIndex-1);
 
                 int cols = Convert.ToInt32(lblColumns.Content);
+
                 int aux = Convert.ToInt32(rowIndex) % 2 == 0 ? 1 : 0;
 
                 for (int i = 1; i <= cols; i++)
                 {
                     var name = gName.Substring(0, colIndex) + "c" + i;
+
                     var rowGrids = (Grid)UIHelper.FindChild<Grid>(matrixContainer, name);
+
                     rowGrids.Background = aux % 2 == 0 ? Brushes.Cornsilk : Brushes.White;
+
                     aux++;
+
                     var lbls = (Label)UIHelper.FindChild<Label>(rowGrids, name + "lbl");
+
                     lbls.Foreground = Brushes.Black;
                 }
-
             }
-           
         }
     }
-
-    
-
 }
