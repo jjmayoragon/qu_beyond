@@ -6,46 +6,66 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WordFinderWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="845" Width="840" MinHeight="845" MinWidth="840" >
+        Title="MainWindow" Height="800" Width="1200" MinHeight="800" MinWidth="1200" >
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0" Grid.ColumnSpan="3" Height="100" VerticalAlignment="Top" Background="#FFD3434D">
-            <Image HorizontalAlignment="Left" Height="59" Margin="40,0,0,0" VerticalAlignment="center" Width="139" Source="Resources/logo.png"/>
+        <Grid Grid.Row="0" Grid.ColumnSpan="5" Background="#FFD3434D">
+            <Image Panel.ZIndex="100" HorizontalAlignment="Left" Height="55" Margin="40,0,0,0" VerticalAlignment="center" Width="139" Source="/logo.png"/>
             <Label Content="WORD FINDER" HorizontalAlignment="center" Margin="0,15,0,0" VerticalAlignment="Top" Width="249" Height="60" FontSize="36" Background="{x:Null}" Foreground="White" FontStretch="Normal" FontWeight="SemiBold" FontFamily="Roboto"/>
-            <Button Content="Generate" HorizontalAlignment="Center"  VerticalAlignment="Top" Click="btnGenerate_click" Width="100" Height="25" BorderBrush="Beige" Margin="0,75,0,0"/>
-            <CheckBox Content="Message Box" HorizontalAlignment="Left" Margin="641,0,0,0" VerticalAlignment="Center" Name="method1"/>
-            <CheckBox IsChecked="True" Content="Highlights Words Found" HorizontalAlignment="Left" Margin="641,68,0,0" VerticalAlignment="Top" Name="method2"/>
+            <Label></Label>
         </Grid>
-        <Grid Name="gridWordsToFind" Grid.Row="1" Grid.Column="2" Background="#FFD3434D">
-            <StackPanel Height="500" Margin="15 0">
-                <Label Margin="0 0 0 10" HorizontalContentAlignment="Center" FontSize="18">Words to find</Label>
-                <TextBox FontSize="18" Margin="0 0 0 10" Name="txtWordToFind" Height="50" ></TextBox>
-                <Button FontSize="18"  Margin="0 0 0 10" Click="btn_addWordToFind" Name="addWordToFind" Height="40"  Content="Add word"></Button>
-                <ListView Height="150" ItemsSource="{Binding listWordsToFind}"/>
+        <Grid Name="gridWordsToFind" Grid.Row="1" Grid.Column="3" Background="IndianRed" >
+            <StackPanel Margin="15 0">
+                <Label Foreground="White" FontWeight="Bold" FontSize="24" Margin="0 0 0 10" HorizontalContentAlignment="Center" >Words to find</Label>
+                <TextBox CharacterCasing="Upper"  MaxLength="{Binding ElementName=sldColumns, Path=Value, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Center" FontSize="24" Margin="0 0 0 10" Name="txtWordToFind" Height="40" PreviewKeyDown="txtWordToFind_PreviewKeyDown" KeyDown="txtWordToFind_KeyDown" />
+                <Button FontWeight="Bold" Background="Firebrick" FontSize="24" Foreground="AliceBlue"  Margin="0 0 0 10" Click="btn_addWordToFind" Name="addWordToFind" Height="50"  Content="Add word" BorderBrush="{x:Null}"></Button>
+                <ListView Name="listViewWordsToFind" HorizontalContentAlignment="Center" FontSize="24" Height="150" ItemsSource="{Binding listWordsToFind}"/>
+                <Button Background="Firebrick" Foreground="White" FontWeight="Bold"   Height="40" FontSize="18" Width="120" Margin="0 10 0 0" Click="btn_refreshList" Content="Refresh list" BorderBrush="{x:Null}"/>
+                <StackPanel Background="#FFD3434D" Margin="0 10" Width="330">
+                    <Label Foreground="White" FontWeight="Bold" FontSize="24" Margin="0 0 0 10" HorizontalContentAlignment="Center" Content="Search services:" />
+                    <CheckBox FontWeight="Bold" Foreground="White" FontSize="18" Content="Message Box Notificaction" HorizontalAlignment="Left" Name="method1" Margin="10 10" Checked="method1_Checked" Unchecked="method1_Unchecked"/>
+                    <CheckBox FontWeight="Bold" Foreground="White" FontSize="18" IsChecked="True" Content="Highlight Words Found in Matrix" Margin="10 10" HorizontalAlignment="Left" Name="method2" Checked="method2_Checked" Unchecked="method2_Unchecked" />
+
+                </StackPanel>
+
+                <Button IsEnabled="False" Name="btnFindWords" FontWeight="Bold" Foreground="White" Background="Firebrick" FontSize="24" Content="Find Top 10 words"  Click="btnFindWord_click" Height="80" Margin="0,0,0,0">
+                  
+                </Button>
             </StackPanel>
+
         </Grid>
         <Grid Name="matrixContainer"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1" >
-            
+
+
+        </Grid>
+        <Grid  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="3" Background="#FFD3434D" Grid.Column="4" >
+
+
+        </Grid>
+        <Grid  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Background="#FFD3434D" Grid.Column="2" >
+
 
         </Grid>
 
-        <Grid Grid.Row="1" Grid.Column="1" Name="gridSetRow" Visibility="Visible">
+        <Grid Grid.Row="1" Grid.Column="1" Name="gridSetRow" Visibility="Collapsed">
             <Grid Panel.ZIndex="4">
                 <Grid>
                     <Grid Background="Black" Opacity="0.4"></Grid>
                     <Label Content="Setting row: " VerticalAlignment="Center" Margin="0 0 0 120" Name="lblNumberOfRows" HorizontalAlignment="Center" FontSize="20"></Label>
-                    <TextBox Name="txtSetRow" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="600" Height="58" FontSize="40" TextAlignment="Center" />
+                    <TextBox  CharacterCasing="Upper" Name="txtSetRow" MaxLength="{Binding ElementName=sldColumns, Path=Value, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="600" Height="58" FontSize="40" TextAlignment="Center" KeyDown="txtSetRow_KeyDown" PreviewKeyDown="txtSetRow_PreviewKeyDown" />
                     <Grid VerticalAlignment="Bottom" Width="240" HorizontalAlignment="Center" Margin="0 0 0 200">
                         <Button Click="btnAddRowToMatrix_Click" Name="btnAddRowToMatrix" FontSize="20" Foreground="Green" FontWeight="Bold" Margin="0,0,0,0" HorizontalAlignment="Left" Width="100">Set</Button>
                         <Button Click="btnCancel_Click" Name="btnCancel" HorizontalAlignment="Right"  Width="100" Height="60" FontSize="20" Foreground="Tomato" FontWeight="Bold" >Cancel</Button>
@@ -67,7 +87,7 @@
             </Grid>-->
         </Grid>
 
-        <Grid  x:Name="pruebaGrid" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Background="#FFD3434D" >
+        <Grid  x:Name="pruebaGrid" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Background="#FFD3434D" >
 
         </Grid>
         <Grid Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="2" Background="#FFD3434D" Height="100">
@@ -100,8 +120,8 @@
             </Label>
 
         </Grid>
-        <Button Content="Set" Grid.Column="1" HorizontalAlignment="Left" Margin="425,77,0,0" Click="Button_Click_1" Height="20" VerticalAlignment="Top"/>
-        <Button Content="Hide" Grid.Column="1" HorizontalAlignment="Left" Margin="470,77,0,3" Click="Button_Click"/>
+        <!--<Button Content="Set" Grid.Column="1" HorizontalAlignment="Left" Margin="425,77,0,0" Click="Button_Click_1" Height="20" VerticalAlignment="Top"/>
+        <Button Content="Hide" Grid.Column="1" HorizontalAlignment="Left" Margin="470,77,0,3" Click="Button_Click"/>-->
 
     </Grid>
 

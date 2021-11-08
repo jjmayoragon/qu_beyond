@@ -297,7 +297,7 @@ namespace WordFinderWPF.Classes
                     msg = ("Column: " + index.ToString() + "  Word: " + word.ToString());
                 }
 
-                MessageBox.Show(msg,"Words found",MessageBoxButton.OK,MessageBoxImage.Information);
+                MessageBox.Show(msg,"Top 10 Words found",MessageBoxButton.OK,MessageBoxImage.Information);
 
             }
 

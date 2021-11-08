@@ -32,6 +32,7 @@ namespace WordFinderWPF
         Cursor PencilCur, HammerCur, MinimalPen, MinimalCur;
         Dictionary<int, string> dictionaryStream;
         Dictionary<string, string> dictionaryCharacter;
+        bool isMethodChecked;
 
         
         
@@ -77,7 +78,7 @@ namespace WordFinderWPF
         
 
       
-        private void btnGenerate_click(object sender, RoutedEventArgs e)
+        private void btnFindWord_click(object sender, RoutedEventArgs e)
         {
             SetMatrixValues(_cols,_rows,_matrix,_wordsToFind);
             GenerateMatrix();
@@ -120,12 +121,15 @@ namespace WordFinderWPF
             //Execute event and call suscribers methods
             generator.Generate(matrix);
 
-            HighLightCells(Utilities.CellsToHighLight);
+            if (method2.IsChecked == true)
+                HighLightCells(Utilities.CellsToHighLight);
         }
 
 
         public void HighLightCells(List<string> cellIndexs)
         {
+
+            PaintChessColorsGridMatrix();
 
             foreach (var cell in cellIndexs)
             {
@@ -144,10 +148,35 @@ namespace WordFinderWPF
 
         }
 
+        private void PaintChessColorsGridMatrix()
+        {
+ 
+            foreach (var d in dictionaryCharacter)
+            {
+                var cell = (Grid)UIHelper.FindChild<Grid>(matrixContainer, d.Key);
+
+                var cellName = cell.Name;
+
+                var index = cellName.Split("c");
+
+                var rowIndex = index[0].Substring(1);
+                var colIndex = index[1];
+
+                int aux = Convert.ToInt32(rowIndex) % 2 == 0 ? 1 : 0;
+
+                if (Convert.ToInt32(rowIndex) % 2 == 0)
+                    cell.Background = aux % 2 == 0 ? Brushes.Cornsilk : Brushes.White;
+                else
+                    cell.Background = aux % 2 == 0 ? Brushes.White : Brushes.Cornsilk;
+                aux++;
+            }
+        }
+
 
 
         private void Format(int rows, int cols)
         {
+            
             _cols = cols;
             _rows = rows;
 
@@ -222,12 +251,16 @@ namespace WordFinderWPF
         {
             setSizePanel.Visibility = Visibility.Visible;
             matrixContainer.Opacity = 0.1;
+            Format(_rows, _cols);
+            ValidateForm();
         }
 
         private void sldRows_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             setSizePanel.Visibility = Visibility.Visible;
             matrixContainer.Opacity = 0.1;
+            Format(_rows, _cols);
+            ValidateForm();
         }
 
 
@@ -301,11 +334,19 @@ namespace WordFinderWPF
 
         private void btnAddRowToMatrix_Click(object sender, RoutedEventArgs e)
         {
-            var row = Convert.ToInt32(lblNumberOfRows.Content.ToString().Split(" ")[2]);
-            var stream = txtSetRow.Text;
-            AddRowToMatrix(row, stream);
+            if (txtSetRow.Text.Length == _cols)
+            {
+                var row = Convert.ToInt32(lblNumberOfRows.Content.ToString().Split(" ")[2]);
+                var stream = txtSetRow.Text;
+                AddRowToMatrix(row, stream);
 
-            gridSetRow.Visibility = Visibility.Collapsed;
+                gridSetRow.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                string msg = ("Text must have " + _cols.ToString() + " characters");
+                MessageBox.Show(msg, "Validation Message", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
 
             
         }
@@ -345,6 +386,127 @@ namespace WordFinderWPF
         private void btn_addWordToFind(object sender, RoutedEventArgs e)
         {
             listWordsToFind.Add(txtWordToFind.Text);
+            txtWordToFind.SelectAll();
+            txtWordToFind.Focus();
+            ValidateForm();
+           
+        }
+
+        private void ValidateForm()
+        {
+            if (listWordsToFind != null && dictionaryStream.Count == _rows && dictionaryCharacter.Count == (_cols*_rows) && btnFindWords != null)
+            {
+                if(listWordsToFind.Count>=1 && dictionaryStream.Count == _rows && isMethodChecked)
+                {
+                    btnFindWords.IsEnabled = true;
+                    btnFindWords.Background = Brushes.Firebrick;
+
+                }
+                else
+                {
+                    btnFindWords.IsEnabled = false;
+                    btnFindWords.Background = Brushes.Black;
+                }
+            }
+        }
+
+        private void btn_refreshList(object sender, RoutedEventArgs e)
+        {
+            listWordsToFind.Clear();
+            ValidateForm();
+        }
+
+        private void txtWordToFind_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(txtSetRow.Text, "^[a-zA-Z ]"))
+            {
+                txtSetRow.Text.Remove(txtSetRow.Text.Length - 1);
+            }
+        }
+
+   
+
+        private void txtSetRow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key >= Key.A && e.Key <= Key.Z)
+            {
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtSetRow_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+            base.OnPreviewKeyDown(e);
+        }
+
+        private void txtWordToFind_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+            base.OnPreviewKeyDown(e);
+        }
+
+        private void txtWordToFind_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key >= Key.A && e.Key <= Key.Z)
+            {
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void method1_Checked(object sender, RoutedEventArgs e)
+        {
+            if (method1.IsChecked.Value || method2.IsChecked.Value)
+                isMethodChecked = true;
+            else
+                isMethodChecked = false;
+
+            ValidateForm();
+        }
+
+        private void method2_Checked(object sender, RoutedEventArgs e)
+        {
+
+            if (method1.IsChecked.Value || method2.IsChecked.Value)
+                isMethodChecked = true;
+            else
+                isMethodChecked = false;
+
+            ValidateForm();
+            
+           
+        }
+
+        private void method2_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (method1.IsChecked.Value || method2.IsChecked.Value)
+                isMethodChecked = true;
+            else
+                isMethodChecked = false;
+
+            ValidateForm();
+        }
+
+        private void method1_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (method1.IsChecked.Value || method2.IsChecked.Value)
+                isMethodChecked = true;
+            else
+                isMethodChecked = false;
+
+            ValidateForm();
         }
 
         private void row_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -359,11 +521,20 @@ namespace WordFinderWPF
 
                 gridName = grid.Name;
 
-                var index = grid.Name.IndexOf("r");
+                var index_row = grid.Name.IndexOf("r");
+                var index_col = grid.Name.IndexOf("c")-1;
 
-                row = grid.Name.Substring(index + 1, 1);
+                var lenghtNumber = index_col - index_row;
 
-                //MessageBox.Show(row);
+                row = grid.Name.Substring(index_row + 1, lenghtNumber);
+
+                lblNumberOfRows.Content = "Setting row: " + row;
+
+                SetRowVisible(true);
+
+                txtSetRow.SelectAll();
+                txtSetRow.Focus();
+                ValidateForm();
             }
 
             if (sender is Label)
@@ -372,23 +543,21 @@ namespace WordFinderWPF
 
                 gridName = lbl.Name;
 
-                var index = lbl.Name.IndexOf("r");
+                var index_row = lbl.Name.IndexOf("r");
+                var index_col = lbl.Name.IndexOf("c")-1;
 
-                row = lbl.Name.Substring(index + 1, 1);
+                var lenghtNumber = index_col - index_row;
 
-                //MessageBox.Show(row);
+                row = lbl.Name.Substring(index_row + 1, lenghtNumber);
+
+                lblNumberOfRows.Content = "Setting row: " + row;
+                
+                SetRowVisible(true);
+
+                txtSetRow.SelectAll();
+                txtSetRow.Focus();
+                ValidateForm();
             }
-
-            lblNumberOfRows.Content = "Setting row: " + row;
-
-            SetRowVisible(true);
-
-            
-
-
-
-            
-
 
         }
 
