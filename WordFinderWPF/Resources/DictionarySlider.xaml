@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--Slider Base style-->
+    <Style TargetType="Slider">
+        <Setter Property="IsSnapToTickEnabled" Value="True"/>
+        <Setter Property="TickFrequency" Value="1"/>
+        
+        <Setter Property="Minimum" Value="1"/>
+        <Setter Property="Maximum" Value="64"/>
+        <Setter Property="Value" Value="5"/>
+
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+    </Style>
+
+    <!--Slider Base exteded Style-->
+    <Style TargetType="Slider" BasedOn="{StaticResource {x:Type Slider}}" x:Key="VerticalSlider">
+        <Setter Property="Height" Value="80"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Height" Value="500"/>
+        <Setter Property="Orientation" Value="Vertical"/>
+
+    </Style>
+    <Style TargetType="Slider" BasedOn="{StaticResource {x:Type Slider}}" x:Key="HorizontalSlider">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Height" Value="35"/>
+
+    </Style>
+</ResourceDictionary>

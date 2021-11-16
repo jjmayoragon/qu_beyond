@@ -10,5 +10,17 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Resources\DictionaryCheckbox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\DictionaryLabel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\DictionaryButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\DictionarySlider.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 </Project>

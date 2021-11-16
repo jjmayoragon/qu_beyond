@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 D:\REPOS\qu\challenge\qu_beyond\WordFinderWPF\App.xaml
-11407045341
+5489667299
 
-8-1560930666
+9-398812542
 193-1891726104
-MainWindow.xaml;
+MainWindow.xaml;Resources\DictionaryButton.xaml;Resources\DictionaryCheckbox.xaml;Resources\DictionaryLabel.xaml;Resources\DictionarySlider.xaml;
 
 False
 

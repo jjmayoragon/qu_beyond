@@ -1,40 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
-using System;
 using System.Globalization;
-using System.Windows.Data;
-using System.Windows.Markup;
-
-namespace IntuoSoft.Wpf.Converters
-{
-
-    [ValueConversion(typeof(string), typeof(string))]
-    public class CapitalizationConverter : MarkupExtension, IValueConverter
-    {
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            => (value as string)?.ToUpper() ?? value; // If it's a string, call ToUpper(), otherwise, pass it through as-is.
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => throw new NotSupportedException();
-
-        public override object ProvideValue(IServiceProvider serviceProvider) => this;
-    }
-}
+using System.Linq;
 
 namespace WordFinderWPF.Classes
 {
-    
-
-    
     public class Utilities
     {
+        private static Random random = new Random();
+
         public static List<string> CellsToHighLight { get; set; }
         public static IEnumerable<string> CallInterface(MatrixObj matrixObj)
         {
@@ -55,7 +32,15 @@ namespace WordFinderWPF.Classes
 
         }
 
- 
+
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+
 
     }
 

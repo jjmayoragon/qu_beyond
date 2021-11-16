@@ -54,7 +54,7 @@ namespace WordFinderWPF
                     
                 }
                 //Only Top 10 words break the loop and continue the next statement
-                if (_foundList.Count > 10)
+                if (_foundList.Count >= 10)
                     break;
             }
 

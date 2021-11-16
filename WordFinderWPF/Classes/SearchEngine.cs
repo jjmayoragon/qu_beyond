@@ -25,6 +25,7 @@ namespace WordFinderWPF.Classes
 
         public void AddMethod(IWordFinder wordFinder)
         {
+            //Dependency Inyector
             _performers.Add(wordFinder);
         }
     }

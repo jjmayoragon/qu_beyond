@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:WordFinderWPF"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary  Source="Resources/DictionaryButton.xaml"/>
+                <ResourceDictionary  Source="Resources/DictionaryLabel.xaml"/>
+                <ResourceDictionary  Source="Resources/DictionarySlider.xaml"/>
+                <ResourceDictionary  Source="Resources/DictionaryCheckbox.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
