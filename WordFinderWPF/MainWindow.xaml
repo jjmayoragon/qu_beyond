@@ -1,0 +1,124 @@
+﻿<Window x:Class="WordFinderWPF.MainWindow"
+    
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WordFinderWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="850" Width="1250" MinHeight="850" MinWidth="1250" >
+
+
+    <Grid Background="#FFD3434D">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="360"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="2" Grid.Row="1">
+            <StackPanel  Height="150" MouseEnter="btnRollTheDice_MouseEnter" MouseLeave="btnRollTheDice_MouseLeave" MouseLeftButtonDown="btnRollTheDice_MouseLeftButtonDown  " >
+                <Image Name="btnRollTheDice" Source="/diceHand.png" Height="100" MouseLeftButtonDown="btnRollTheDice_MouseLeftButtonDown" Margin="3 3 0 0" MouseEnter="btnRollTheDice_MouseEnter" MouseLeave="btnRollTheDice_MouseLeave" />
+                <TextBlock Visibility="Collapsed" Name="lblRollTheDice" FontFamily="Roboto" Foreground="White" Text="Random Generator" TextAlignment="Center" TextWrapping="Wrap" Height="auto" FontSize="18" ></TextBlock>
+
+            </StackPanel>
+        </Grid>
+
+
+        <Grid Grid.Row="0" Grid.ColumnSpan="5">
+            <Image HorizontalAlignment="Left" Height="55" Margin="40,0,0,0" VerticalAlignment="center" Width="139" Source="/logo.png"/>
+            <Label Style="{StaticResource MainTitle}" Content="WORD FINDER"  Margin="0,15,0,0" />
+        </Grid>
+        <Grid Name="gridWordsToFind" Grid.Row="1" Grid.Column="3" Background="IndianRed" >
+            <StackPanel  Margin="15 0">
+                <Label Margin="0 10 0 10">Words to find</Label>
+                <TextBox CharacterCasing="Upper"  MaxLength="{Binding ElementName=sldColumns, Path=Value, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Center" FontSize="24" Margin="0 0 0 10" Name="txtWordToFind" Height="40" PreviewKeyDown="txtWordToFind_PreviewKeyDown" KeyDown="txtWordToFind_KeyDown" TextChanged="txtWordToFind_TextChanged" />
+                <Grid Background="#FFD3434D"  Margin="0 0 0 10"  MouseLeftButtonDown="btn_addWordToFind_click" Name="btn_AddWordToFind"  Height="74" MouseEnter="btn_addWordToFind_mouse_enter" MouseLeave="btn_AddWordToFind_MouseLeave" >
+                    <Label Content="Add word" VerticalContentAlignment="Top"/>
+                    <Image  Source="/downArrow.png" VerticalAlignment="Bottom"  Height="50" Width="70" Stretch="Fill"></Image>
+                </Grid>
+                <ListView Name="listViewWordsToFind" HorizontalContentAlignment="Center" Foreground="Black" FontSize="24" Height="150" ItemsSource="{Binding listWordsToFind}"/>
+                <Button Style="{StaticResource SmallButtonStyle}" Margin="0 10 0 0" Click="btn_refreshList" Content="Refresh list" />
+                <StackPanel Background="#FFD3434D" Margin="0 10" Width="330">
+                    <Label Margin="0 0 0 10" Content="Search services:" />
+                    <CheckBox Content="Message Box Notificaction" Name="method1" Checked="method1_Checked" Unchecked="method1_Unchecked"/>
+                    <CheckBox IsChecked="True" Content="Highlight Words Found in Matrix" Name="method2" Checked="method2_Checked" Unchecked="method2_Unchecked" />
+
+                </StackPanel>
+
+                <Button Style="{StaticResource LargeButtonStyle}" IsEnabled="False" Name="btnFindWords" Content="Find Top 10 words"  Click="btnFindWord_click" Margin="0,10,0,0">
+
+                </Button>
+            </StackPanel>
+
+        </Grid>
+        <Grid Background="White" Name="matrixContainer" Grid.Row="1" Grid.Column="1" >
+
+        </Grid>
+
+
+        <Grid Grid.Row="1" Grid.Column="1" Name="gridSetRow" Visibility="Collapsed">
+            <Grid Panel.ZIndex="4">
+                <Grid>
+                    <Grid Background="Black" Opacity="0.4"></Grid>
+                    <Label Content="Setting row: " Margin="0 0 0 120" Name="lblNumberOfRows" FontSize="20"></Label>
+                    <TextBox  CharacterCasing="Upper" Name="txtSetRow" MaxLength="{Binding ElementName=sldColumns, Path=Value, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="600" Height="58" FontSize="40" TextAlignment="Center" KeyDown="txtSetRow_KeyDown" PreviewKeyDown="txtSetRow_PreviewKeyDown" />
+                    <Grid VerticalAlignment="Bottom" Width="240" HorizontalAlignment="Center" Margin="0 0 0 200">
+                        <Button Style="{StaticResource SmallGrayOkButtonStyle}"     Click="btnSetRowToMatrix_Click" Name="btnAddRowToMatrix" HorizontalAlignment="Left"   Margin="0,0,0,0">Set</Button>
+                        <Button Style="{StaticResource SmallGrayCancelButtonStyle}" Click="btnCancel_Click"         Name="btnCancel"         HorizontalAlignment="Right">Cancel</Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Grid Background="White" Opacity="0.8" Panel.ZIndex="5" Grid.Row="1" Grid.Column="1" Name="gridWhiteTransparency" Visibility="Collapsed">
+            <StackPanel Margin="0 0 0 100" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                
+
+            </StackPanel>
+        </Grid>
+        <Grid Background="Transparent" Panel.ZIndex="5" Grid.Row="1" Grid.Column="1" Name="gridRollTheDice" Visibility="Collapsed">
+            <StackPanel Margin="0 0 0 0" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Image Visibility="Visible" Height="200" Width="200" Source="/dice.png"></Image>
+                <Label  FontSize="36" FontWeight="Normal" Foreground="Black" Content="   Random population..."></Label>
+               
+            </StackPanel>
+        </Grid>
+        
+        <Grid Background="White" Panel.ZIndex="5" Grid.Row="1" Grid.Column="1" Name="setSizePanel" Visibility="Hidden">
+            <StackPanel Margin="0 0 0 100" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label  x:Name="lblRows" FontWeight="Normal" Foreground="Black" FontSize="170" Content="{Binding ElementName=sldRows, Path=Value, UpdateSourceTrigger=PropertyChanged}" ></Label>
+                <Label  FontSize="170" FontWeight="Normal" Foreground="Black">x</Label>
+                <Label x:Name="lblColumns" FontWeight="Normal" Foreground="Black" FontSize="170" Content="{Binding ElementName=sldColumns, Path=Value, UpdateSourceTrigger=PropertyChanged}"></Label>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="2">
+            <Slider Style="{StaticResource HorizontalSlider}" PreviewMouseLeftButtonUp="sldColumns_PreviewMouseLeftButtonUp" x:Name="sldColumns" Margin="0,19,0,0" ValueChanged="sldColumns_ValueChanged" />
+            <StackPanel Orientation="Horizontal" Margin="0,42,0,0" Width="180">
+                <Label Content="COLUMNS ="/>
+                <Label Content="{Binding ElementName=sldColumns, Path=Value, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <Label Content="1" HorizontalAlignment="Left" Margin="5,45,0,0" VerticalAlignment="Top" Width="40"/>
+            <Label Content="64" HorizontalAlignment="Right" Margin="0,45,5,0" VerticalAlignment="Top" Width="40"/>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Slider Style="{StaticResource VerticalSlider}" PreviewMouseLeftButtonUp="sldRows_PreviewMouseLeftButtonUp"  x:Name="sldRows"   Margin="15,0,0,0" ValueChanged="sldRows_ValueChanged"/>
+            <StackPanel Height="100" HorizontalAlignment="Right">
+                <Label Content="ROWS"></Label>
+                <Label Content="{Binding ElementName=sldRows, Path=Value, UpdateSourceTrigger=PropertyChanged}">
+                </Label>
+            </StackPanel>
+            <Label Content="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="40" Margin="40,0,0,40"></Label>
+            <Label Content="64" HorizontalAlignment="Center" VerticalAlignment="top" Margin="20,40,0,0" Width="40"></Label>
+        </Grid>
+    </Grid>
+
+</Window>
+

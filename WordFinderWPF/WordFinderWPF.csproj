@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="dice.png" />
+    <None Remove="diceHand.png" />
+    <None Remove="dices.png" />
+    <None Remove="downArrow.png" />
+    <None Remove="logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="dice.png" />
+    <Resource Include="diceHand.png" />
+    <Resource Include="dices.png" />
+    <Resource Include="downArrow.png" />
+    <Resource Include="logo.png" />
+  </ItemGroup>
+
+</Project>
